@@ -12,16 +12,17 @@ v: 3
 area: "Transport"
 workgroup: "IP Performance Measurement"
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - Latency
+ - Metric
+ - RPM
+ - Quality Attenuation
 venue:
   group: "IP Performance Measurement"
   type: "Working Group"
   mail: "ippm@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/ippm/"
-  github: "domoslabs/AppQualityMetricRFC"
-  latest: "https://domoslabs.github.io/AppQualityMetricRFC/draft-teigen-ippm-app-quality-metric-reqs.html"
+  github: "domoslabs/AppQualityMetricID"
+  latest: "https://domoslabs.github.io/AppQualityMetricID/draft-teigen-ippm-app-quality-metric-reqs.html"
 
 author:
  -
