@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "Requirements for a Network Quality Framework Useful for Applications, Users and Operators".
 
-* [Editor's Copy](https://domoslabs.github.io/AppQualityMetricRFC/#go.draft-teigen-ippm-app-quality-metric-reqs.html)
+* [Editor's Copy](https://domoslabs.github.io/AppQualityMetricID/#go.draft-teigen-ippm-app-quality-metric-reqs.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-teigen-ippm-app-quality-metric-reqs)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-teigen-ippm-app-quality-metric-reqs)
-* [Compare Editor's Copy to Individual Draft](https://domoslabs.github.io/AppQualityMetricRFC/#go.draft-teigen-ippm-app-quality-metric-reqs.diff)
+* [Compare Editor's Copy to Individual Draft](https://domoslabs.github.io/AppQualityMetricID/#go.draft-teigen-ippm-app-quality-metric-reqs.diff)
 
 
 ## Contributing
