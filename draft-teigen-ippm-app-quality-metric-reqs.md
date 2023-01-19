@@ -102,7 +102,7 @@ Our ultimate goal is to compute the probability of application success. This goa
 
 Different applications have different needs from the network, and they put different patterns of load on the network. To provide an answer to whether or not applications will work well or fail, a network quality framework must therefore be able to compare measurements of network performance to many different application requirements. Flexibility of application requirements is a necessary condition.
 
-How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support composition {{RFC6049}}. Composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time or the application will likely fail. The most intuitive way to think about composition (in our opinion) is as addition and subtraction. For example, if we measure web-page load-times and find they are too often too slow, we may then separately measure DNS resolution time, TCP round-trip time and the time it takes to establish TLS connections to get a better idea of where the problem is. To be maximally useful for operators, a network quality framework should support this kind of analysis.
+How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support sequential composition {{RFC6049}}. Sequential composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time or the application will likely fail. The most intuitive way to think about sequential composition (in our opinion) is as addition and subtraction. For example, if we measure web-page load-times and find they are too often too slow, we may then separately measure DNS resolution time, TCP round-trip time and the time it takes to establish TLS connections to get a better idea of where the problem is. To be maximally useful for operators, a network quality framework should support this kind of analysis.
 
 To summarize, the framework and "meaningful metric" we're looking for should have the following properties:
 
@@ -144,27 +144,44 @@ Many network performance metrics and frameworks for reasoning about them have be
 
 For each of the metrics below we discuss, briefly, whether or not they meet each of the three criteria set out in the introduction.
 
-*Average Peak Througphut*
-
-Throughput relates to user-observable application outcomes in the sense that there must be *enough* bandwidth available. Adding extra bandwidth above a certain threshold will at best receive diminishing returns.
+## Average Peak Througphut
+Throughput relates to user-observable application outcomes in the sense that there must be *enough* bandwidth available. Adding extra bandwidth above a certain threshold will at best receive diminishing returns. It is not possible to compute the probability of application success or failure based on throughput alone for most applications.
+Throughput can be compared to a variety of application requirements, but since there is no clear correlation between througphut and application performance it is not possible to conclude that an application will work well even if we know enough throughput is available.
 
 Throughput cannot be composed.
 
-Throughput is relatively well understood amongst consumers.
+Throughput is well known and understood amongst consumers.
 
-*Average Latency*
+## Average Latency
+Average latency relates to user-observable application outcomes in the sense that the average latency must be low enough to support a good experience. However, it is not possible to conlude that a general application will work well based on the fact that the average latency is good enough {{BITAG}}.
 
-TODO
+Average latency can be composed. If the average latency of links a-b and b-c is know, then the average latency of the composition a-b-c is the sum of a-b and b-c.
 
-*99th Percentile of Latency*
+Average latency is known and understood by some consumers, but most likely less so than throughput. We believe it is well known among application developers.
 
-TODO
+## 99th Percentile of Latency
 
-*Trimmed Mean of Latency*
+The 99th percentile of latency relates to user-observable application outcomes because it captures some information about how bad the tail latency is.
 
-TODO
+It is not possible, in general, to compose percentile values.
 
-*Round-trips Per Minute*
+## Variance of latency
+
+The variance of latency can be composed. If the variance of links a-b and b-c is known, then the variance of the composition a-b-c is the sum of the variances a-b and b-c.
+
+## Jitter
+
+Jitter measures the difference in delay between subsequent packets. Some applications are very sensitive to this because of time-outs that cause later-than-usual packets to be discarded.
+
+Jitter cannot be composed.
+
+## Trimmed Mean of Latency
+
+The trimmed mean of latency is the average computed after the worst x percent of samples have been removed. Trimmed means are typically used in cases where there is a know rate of measurement errors that should be filtered out before computing results.
+
+In the case where the trimmed mean simply removes measurement errors, the result can be composed in the same way as the average latency. In cases where the trimmed mean removes real measurements the trimming operation introduces errors that may compound when composed.
+
+## Round-trips Per Minute
 
 Round-trips per minute {{RPM}} is a metric and test procedure specifically designed to measure delays as experienced by application-layer protocol procedures such as HTTP GET, establishing a TLS connection and DNS lookups. It therefore measures something very close to the user-perceived application outcomes of HTTP-based applications. RPM loads the network before conducting latency measurements, and is therefore a measure of loaded latency (or working latency) well-suited to detecting bufferbloat {{Bufferbloat}}.
 
@@ -172,7 +189,7 @@ RPM is not composable.
 
 RPM is understandable to end-users.
 
-*Quality Attenuation*
+## Quality Attenuation
 
 Quality Attenuation is a network performance metric that combines latency and packet loss into a single variable {{TR-452.1}}.
 
@@ -182,13 +199,15 @@ Quality Attenuation is composable because convolution of quality attenuation val
 
 Quality Attenuation is not easily understandable for end-users or application developers. More work is needed to make it useful for these groups.
 
-*Summary of performance metrics*
+## Summary of performance metrics
 
 | Metric                         | Capture probability of good/bad application outcome | Composable | Compare to a variety of application requirements | Understandable for end-users and App devs |
 |--------------------------------|-----------------------------------------------------|------------|--------------------------------------------------|-------------------------------------------|
 | Average latency                | No                                                  | Yes        | Yes                                              | Yes                                       |
+| Variance of latency            | No                                                  | Yes        | Yes                                              | Yes                                       |
+| Jitter                         | No                                                  | No         | Yes                                              | Yes                                       |
 | Average Peak Throughput        | No                                                  | No         | Yes                                              | Yes                                       |
-| 99th Percentile of Latency     | No                                                  | No         | Yes                                              | Yes                                       |
+| 99th Percentile of Latency     | No                                                  | No         | Yes                                              | No                                        |
 | Trimmed mean of latency        | Yes (depending on what is measured)                 | No         | Yes                                              | Yes                                       |
 | Round Trips Per Minute {{RPM}} | Yes                                                 | No         | Yes                                              | Yes                                       |
 | Quality Attenuation            | Yes                                                 | Yes        | Yes                                              | No                                        |
