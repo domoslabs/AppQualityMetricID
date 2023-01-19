@@ -84,7 +84,7 @@ informative:
 
 --- abstract
 
-This document aims to describe the features and attributes a network quality framework must include to be useful for different stakeholders.
+This document describes the features and attributes a network quality framework must include to be useful for different stakeholders.
 The stakeholders included are developers of Applications, End-Users, and Network Operators and Vendors.
 At a high level, End-Users needs a network metric that is understandable.
 Application developers need a network metric that allows them to evaluate how well their application is likely to perform given the measured network performance.
@@ -145,7 +145,7 @@ From an operator perspective, the key is to have a framework that lets operators
 
 By having mathematically correct composition, a network operator can measure two segments separately, perhaps even with different approaches, and add them together to understand the end-to-end network quality. A network equipment vendor may use a different approach to figure out the network quality from the network equipment to the end–user device and to servers, having the possibility of adding these segments will help network operators better understand end-to-end performance.
 
-The quality framework must be useful across lab testing, production network active testing, and monitoring. It must be useful on different time-scales and it can’t have a dependency on network technology or OSI Layer.
+The quality framework must be useful for both lab testing and monitoring of production networks. It must be useful on different time-scales and it can’t have a dependency on network technology or OSI layer.
 
 If these requirements are met, a network operator can monitor and test their network and understand where the true bottlenecks are, regardless of network technology.
 
@@ -219,7 +219,7 @@ Quality Attenuation is not easily understandable for end-users or application de
 | Average Peak Throughput        | No                                                  | No         | Yes                                              | Yes                                       |
 | 99th Percentile of Latency     | No                                                  | No         | Yes                                              | No                                        |
 | Trimmed mean of latency        | Yes (depending on what is measured)                 | No         | Yes                                              | Yes                                       |
-| Round Trips Per Minute {{RPM}} | Yes                                                 | No         | Yes                                              | Yes                                       |
+| Round Trips Per Minute         | Yes                                                 | No         | Yes                                              | Yes                                       |
 | Quality Attenuation            | Yes                                                 | Yes        | Yes                                              | No                                        |
 
 # Conclusion
@@ -247,4 +247,4 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors would like to acknowledge Gavin Young, Peter Thompson, Brendan Black, Kevin Smith, Gino Dion, Mayur Sarode, Greg Mirsky, Olav Nedrelid, Wim De Ketelaere and Ian Wheelock for their review and comments.
