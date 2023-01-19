@@ -46,6 +46,7 @@ informative:
   RFC6049: # Spatial Composition of Metrics
   #RFC8033: # PIE
   #RFC8290: # FQ_CoDel
+  RFC6390: # Guidelines for Considering New Performance Metric Development
   RFC9318: # IAB Workshop report
   SHARED:
     title: "The Internet is a Shared Network"
@@ -93,7 +94,7 @@ Existing network quality metrics and frameworks typically address the needs of o
 --- middle
 
 # Introduction
-The goal of this document is to describe the features a network performance framework must have to be understandable to end-users, useful for application developers, and actionable for network operators. The motivaton for targeting users, application developers and operators all at once is this: solutions exist for many of the problems causing high and unstable latency in the Internet, but the incentives to deploy them are relatively weak. Creating a unifying framework for network quality can help make these incentives stronger. To achieve stronger incentives we believe it is necessary to reach users and application developers while at the same time measuring something operators and vendors can work to optimize. We discuss the needs of each of these stakeholders in turn, and describe what it takes for a network quality framework to meet these needs.
+The goal of this document is to describe the features a network performance framework must have to be understandable to end-users, useful for application developers, and actionable for network operators. The motivaton for targeting users, application developers and operators all at once is this: solutions exist for many of the problems causing high and unstable latency in the Internet, but the incentives to deploy them are relatively weak. Creating a unifying framework for network quality can help make these incentives stronger. To achieve stronger incentives we believe it is necessary to reach users and application developers while at the same time measuring something operators and vendors can work to optimize.
 
 Bandwidth is necessary, but not sufficient for high-quality modern network experiences. Idle latency, working latency, jitter, and unmitigated packet loss are major causes for poor application outcomes. In network engineering circles, this is becoming widely recognized {{BITAG}}. Unfortunately, it is complicated to benchmark the quality of network transport. Most end-users are unable to relate to metrics other than Mbps, which they have long been conditioned to think of as the only dimension of network quality.
 
@@ -109,11 +110,11 @@ The overall goal is to describe the requirements for an objective network qualit
 
 # Requirements
 
-In general, application success depends on the delay of the network links and computational steps involved in making the application function. These delays in turn depend on how the application places load on the network. A suitable network performance metric must be able to desribe the delay characteristics of the network under realistic conditions and in enough detail to compute the probability of application success with satisfactory accuracy and precision.
+In general, application success depends on the delay of the network links and computational steps involved in making the application function. These delays in turn depend on how the application places load on the network, and how the network responds to environmental conditions and load from other users sharing the network resources. A suitable network performance metric must be able to desribe the delay characteristics of the network under realistic conditions and in enough detail to compute the probability of application success with satisfactory accuracy and precision.
 
 Different applications have different needs from the network, and they put different patterns of load on the network. To provide an answer to whether or not applications will work well or fail, a network quality framework must therefore be able to compare measurements of network performance to many different application requirements. Flexibility in describing application requirements is a necessary condition.
 
-How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support sequential composition {{RFC6049}}. Sequential composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time for the application to succeed. The most intuitive way to think about sequential composition (in our opinion) is as addition and subtraction. For example, if we measure web-page load-times and find they are too often too slow, we may then separately measure DNS resolution time, TCP round-trip time and the time it takes to establish TLS connections to get a better idea of where the problem is. To be maximally useful for operators, a network quality framework should support this kind of analysis.
+How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support spatial composition {{RFC6049}}, {{RFC6390}}. Spatial composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time for the application to succeed. The most intuitive way to think about sequential composition (in our opinion) is as addition and subtraction. For example, if we measure web-page load-times and find they are too often too slow, we may then separately measure DNS resolution time, TCP round-trip time and the time it takes to establish TLS connections to get a better idea of where the problem is. To be maximally useful for operators, a network quality framework should support this kind of analysis.
 
 To summarize, the framework and "meaningful metric" we're looking for should have the following properties:
 
@@ -151,7 +152,7 @@ If these requirements are met, a network operator can monitor and test their net
 # Discussion of other performance metrics
 Many network performance metrics and frameworks for reasoning about them have been proposed, used, and abused througout the years. We present a brief description of some of the most relevant metrics.
 
-For each of the metrics below we discuss, briefly, whether or not they meet each of the three criteria set out in the introduction.
+For each of the metrics below we discuss, briefly, whether or not they meet each of the three criteria set out in the requirements.
 
 ## Average Peak Througphut
 Throughput relates to user-observable application outcomes in the sense that there must be *enough* bandwidth available. Adding extra bandwidth above a certain threshold will at best receive diminishing returns. It is not possible to compute the probability of application success or failure based on throughput alone for most applications.
@@ -224,7 +225,7 @@ Quality Attenuation is not easily understandable for end-users or application de
 # Conclusion
 This work describes requirements for a new network quality framework that extends existing network quality metrics (i.e., RPM {{RPM}}, Quality Attenuation {{TR-452.1}}). We describe a framework which is useful for end-users, network operators, vendors and applications. RPM does a great job of improving visibility of network quality issues beyond throughput, but is inherently about end-to-end tests and is not designed to help network operators monitor, test, and understand their networks from within. Quality Attenuation {{TR-452.1}}, on the other hand, is a great tool for understanding the performance of a network from within, but is not easy to use or understand for end-users or application developers.
 
-Quality attenuation is a network quality metric that meets the three criteria we set out in the introduction; it captures the probabilty of good or bad application outcomes, it is composable, and it can be compared to a variety of application requirements. The part that is still missing is how to present quality attenuation results to end-users and application developers in an understandable way. We believe a per-application (or per application-type) approach is appropriate here. The challenge lies in how to simplify. We must specify how and when it is apporpriate to throw away information without loosing too much precision and accuracy in the results. This depends on the needs and behaviours of different applications, and therefore the IETF seems like a good place to develop this. We need feedback from a wide range of application developers, protocol designers, and other users to make sure the resulting framework is as robust and general as possible.
+Quality attenuation is a network quality metric that meets the three criteria we set out in the requirements; it captures the probabilty of good or bad application outcomes, it is composable, and it can be compared to a variety of application requirements. The part that is still missing is how to present quality attenuation results to end-users and application developers in an understandable way. We believe a per-application (or per application-type) approach is appropriate here. The challenge lies in how to simplify. We must specify how and when it is apporpriate to throw away information without loosing too much precision and accuracy in the results. This depends on the needs and behaviours of different applications, and therefore the IETF seems like a good place to develop this. We need feedback from a wide range of application developers, protocol designers, and other users to make sure the resulting framework is as robust and general as possible.
 
 # Conventions and Definitions
 
