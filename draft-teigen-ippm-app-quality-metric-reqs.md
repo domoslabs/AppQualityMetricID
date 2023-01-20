@@ -48,12 +48,12 @@ informative:
   #RFC8290: # FQ_CoDel
   RFC6390: # Guidelines for Considering New Performance Metric Development
   RFC9318: # IAB Workshop report
-  SHARED:
-    title: "The Internet is a Shared Network"
-    author:
-      name: "Stuart Cheshire"
-    format:
-      PDF: https://www.iab.org/wp-content/IAB-uploads/2021/09/draft-cheshire-internet-isshared-00b.pdf
+  # SHARED:
+  #   title: "The Internet is a Shared Network"
+  #   author:
+  #     name: "Stuart Cheshire"
+  #   format:
+  #     PDF: https://www.iab.org/wp-content/IAB-uploads/2021/09/draft-cheshire-internet-isshared-00b.pdf
   TR-452.1:
     title: "TR-452.1: Quality Attenuation Measurement Architecture and Requirements"
     author:
@@ -102,15 +102,15 @@ Real Time Response under load tests{{RRUL}} and Responsiveness {{RPM}} make huge
 
 As pointed out in {{RPM}} “Our networks remain unresponsive, not from a lack of technical solutions, but rather a lack of awareness of the problem.” The lack of awareness means a lack of incentives for operators to invest in improving network quality (beyond increasing the throughput). While Open Source solutions exist, vendors rarely implement them. And it all boils down to lack of a universally accepted network quality framework that captures how well applications are likely to work.
 
-A recent IAB workshop on measuring internet quality for end users identified this important point: Users mostly care about application performance (as opposed to network performance). Among the conclusions is the statement "A really meaningful metric for users is whether their application will work properly or fail because of a lack of a network with sufficient characteristics" {{RFC9318}}.
-Because the Internet is a shared network {{SHARED}}, network metrics are seldom constant. Their values change over time based on variations in load (amongst other things), and there is no feasible way to predict exactly how conditions will change. Therefore it is not possible to measure a network once and then conclude that an application will work well on that network. Because network performance changes over time, the best we can do is to estimate the *probability of application success*. In the following we describe the necessary features a network quality metric and framework must have to support computing the probability of application success.
+A recent IAB workshop on measuring internet quality for end users identified this important point: Users mostly care about application performance (as opposed to network performance). Among the conclusions is the statement "A really meaningful metric for users is whether their application will work properly or fail because of a lack of a network with sufficient characteristics" {{RFC9318}}. One of the requirements we set out here is therefore to be able to answer this question: "Will an application work properly?". An answer to this question requires a couple of things; First, we must acknowledge that the internet is stochastic (from the point-of-view of any given client) and we can never answer this question with certainty. Second, different applications have different needs and adapts differently to varying network conditions. Any framework aiming to answer this question must be able to cater to the needs of different applications.
 
 # Design Goal
-The overall goal is to describe the requirements for an objective network quality framework and metric that is useful for end-users, application developers and network operators/vendors alike. We believe the ability to compute the probability of application success is a key part of this.
+The overall goal is to describe the requirements for an objective network quality framework and metric that is useful for end-users, application developers and network operators/vendors alike.
 
 # Requirements
+This section describes the three main requirements, and the motivation for each, in turn.
 
-In general, application success depends on the delay of the network links and computational steps involved in making the application function. These delays in turn depend on how the application places load on the network, and how the network responds to environmental conditions and load from other users sharing the network resources. A suitable network performance metric must be able to desribe the delay characteristics of the network under realistic conditions and in enough detail to compute the probability of application success with satisfactory accuracy and precision.
+In general, application success depends on the delay of the network links and computational steps involved in making the application function. These delays in turn depend on how the application places load on the network, how the network is affected by environmental conditions, and the behavior of other users sharing the network resources. A suitable network performance metric must be able to desribe the delay characteristics of the network under realistic conditions and in enough detail to compute how likely application success is with satisfactory accuracy and precision.
 
 Different applications have different needs from the network, and they put different patterns of load on the network. To provide an answer to whether or not applications will work well or fail, a network quality framework must therefore be able to compare measurements of network performance to many different application requirements. Flexibility in describing application requirements is a necessary condition.
 
@@ -152,11 +152,11 @@ If these requirements are met, a network operator can monitor and test their net
 # Discussion of other performance metrics
 Many network performance metrics and frameworks for reasoning about them have been proposed, used, and abused througout the years. We present a brief description of some of the most relevant metrics.
 
-For each of the metrics below we discuss, briefly, whether or not they meet each of the three criteria set out in the requirements.
+For each of the metrics below we discuss whether or not they meet each of the three criteria set out in the requirements.
 
 ## Average Peak Througphut
-Throughput relates to user-observable application outcomes in the sense that there must be *enough* bandwidth available. Adding extra bandwidth above a certain threshold will at best receive diminishing returns. It is not possible to compute the probability of application success or failure based on throughput alone for most applications.
-Throughput can be compared to a variety of application requirements, but since there is no clear correlation between througphut and application performance it is not possible to conclude that an application will work well even if we know enough throughput is available.
+Throughput relates to user-observable application outcomes in the sense that there must be *enough* bandwidth available. Adding extra bandwidth above a certain threshold will at best receive diminishing returns (and any returns are often due to reduced latency). It is not possible to compute the probability of application success or failure based on throughput alone for most applications.
+Throughput can be compared to a variety of application requirements, but since there is no clear correlation between througphut and application performance it is not possible to conclude that an application will work well even if we know that enough throughput is available.
 
 Throughput cannot be composed.
 
@@ -165,34 +165,35 @@ Throughput is well known and understood amongst consumers.
 ## Average Latency
 Average latency relates to user-observable application outcomes in the sense that the average latency must be low enough to support a good experience. However, it is not possible to conlude that a general application will work well based on the fact that the average latency is good enough {{BITAG}}.
 
-Average latency can be composed. If the average latency of links a-b and b-c is know, then the average latency of the composition a-b-c is the sum of a-b and b-c.
+Average latency can be composed. If the average latency of links a-b and b-c is known, then the average latency of the composition a-b-c is the sum of a-b and b-c.
 
-Average latency is known and understood by some consumers, but most likely less so than throughput. We believe it is well known among application developers.
+Average latency is known and understood by some consumers, but most likely less so than throughput. We believe it is well known and understood among application developers.
 
 ## 99th Percentile of Latency
-
-The 99th percentile of latency relates to user-observable application outcomes because it captures some information about how bad the tail latency is.
+The 99th percentile of latency relates to user-observable application outcomes because it captures some information about how bad the tail latency is. If an application can handle 1% of packets being too late, for instance by maintaining a playback buffer, then the 99th percentile can be a good metric for measuring application performance. It does not work as well for applications that are very sensitive to overly delayed packets because the 99th percentile disregards all information about the delays of the worst 1% of packets.
 
 It is not possible, in general, to compose percentile values.
 
 ## Variance of latency
+Network latency is not necessarily normally distributed, and so it can be difficult to extrapolate from a measure of the variance of latency to how well specific applications will work.
 
 The variance of latency can be composed. If the variance of links a-b and b-c is known, then the variance of the composition a-b-c is the sum of the variances a-b and b-c.
 
-## Jitter
+The variance of latency is not well-known or understood amongst comsumers and application developers.
 
-Jitter measures the difference in delay between subsequent packets. Some applications are very sensitive to this because of time-outs that cause later-than-usual packets to be discarded.
+## Jitter
+Jitter measures the difference in delay between subsequent packets. Some applications are very sensitive to this because of time-outs that cause later-than-usual packets to be discarded. For some applications, jitter can be useful in assessing application performance, especially when it is combined with other latency metrics.
 
 Jitter cannot be composed.
 
-## Trimmed Mean of Latency
+Jitter is known to some end-users and application developers, but not widely so.
 
+## Trimmed Mean of Latency
 The trimmed mean of latency is the average computed after the worst x percent of samples have been removed. Trimmed means are typically used in cases where there is a know rate of measurement errors that should be filtered out before computing results.
 
 In the case where the trimmed mean simply removes measurement errors, the result can be composed in the same way as the average latency. In cases where the trimmed mean removes real measurements the trimming operation introduces errors that may compound when composed.
 
 ## Round-trips Per Minute
-
 Round-trips per minute {{RPM}} is a metric and test procedure specifically designed to measure delays as experienced by application-layer protocol procedures such as HTTP GET, establishing a TLS connection and DNS lookups. It therefore measures something very close to the user-perceived application outcomes of HTTP-based applications. RPM loads the network before conducting latency measurements, and is therefore a measure of loaded latency (or working latency) well-suited to detecting bufferbloat {{Bufferbloat}}.
 
 RPM is not composable.
@@ -200,10 +201,9 @@ RPM is not composable.
 RPM is understandable to end-users.
 
 ## Quality Attenuation
-
 Quality Attenuation is a network performance metric that combines latency and packet loss into a single variable {{TR-452.1}}.
 
-Quality Attenuation relates to user-observable outcomes in the sense that user-observable outcomes can be measured using the Quality Attenuation metric directly, or the quality attenuation value describing the time-to-completion of a user-observable outcome can be computed if we know the quality attenuation of each sub-goal required to reach the desired outcome.
+Quality Attenuation relates to user-observable outcomes in the sense that user-observable outcomes can be measured using the Quality Attenuation metric directly, or the quality attenuation value describing the time-to-completion of a user-observable outcome can be computed if we know the quality attenuation of each sub-goal required to reach the desired outcome {{Haeri22}}.
 
 Quality Attenuation is composable because convolution of quality attenuation values allow us to compute the time it takes to reach specific outcomes given the quality attenuation of each sub-goal {{Haeri22}}.
 
@@ -211,21 +211,23 @@ Quality Attenuation is not easily understandable for end-users or application de
 
 ## Summary of performance metrics
 
-| Metric                         | Capture probability of good/bad application outcome | Composable | Compare to a variety of application requirements | Understandable for end-users and App devs |
-|--------------------------------|-----------------------------------------------------|------------|--------------------------------------------------|-------------------------------------------|
-| Average latency                | No                                                  | Yes        | Yes                                              | Yes                                       |
-| Variance of latency            | No                                                  | Yes        | Yes                                              | Yes                                       |
-| Jitter                         | No                                                  | No         | Yes                                              | Yes                                       |
-| Average Peak Throughput        | No                                                  | No         | Yes                                              | Yes                                       |
-| 99th Percentile of Latency     | No                                                  | No         | Yes                                              | No                                        |
-| Trimmed mean of latency        | Yes (depending on what is measured)                 | No         | Yes                                              | Yes                                       |
-| Round Trips Per Minute         | Yes                                                 | No         | Yes                                              | Yes                                       |
-| Quality Attenuation            | Yes                                                 | Yes        | Yes                                              | No                                        |
+Some metrics, like peak throughput, are purely network
+
+| Metric                         | Capture probability of applications working well    | Composable | Understandable for end-users and App devs |
+|--------------------------------|-----------------------------------------------------|------------|-------------------------------------------|
+| Average latency                | No                                                  | Yes        | Yes                                       |
+| Variance of latency            | No                                                  | Yes        | No                                        |
+| Jitter                         | No                                                  | No         | Yes                                       |
+| Average Peak Throughput        | No                                                  | No         | Yes                                       |
+| 99th Percentile of Latency     | No                                                  | No         | No                                        |
+| Trimmed mean of latency        | Yes (depending on what is measured)                 | No         | Yes                                       |
+| Round Trips Per Minute         | Yes                                                 | No         | Yes                                       |
+| Quality Attenuation            | Yes                                                 | Yes        | No                                        |
 
 # Conclusion
-This work describes requirements for a new network quality framework that extends existing network quality metrics (i.e., RPM {{RPM}}, Quality Attenuation {{TR-452.1}}). We describe a framework which is useful for end-users, network operators, vendors and applications. RPM does a great job of improving visibility of network quality issues beyond throughput, but is inherently about end-to-end tests and is not designed to help network operators monitor, test, and understand their networks from within. Quality Attenuation {{TR-452.1}}, on the other hand, is a great tool for understanding the performance of a network from within, but is not easy to use or understand for end-users or application developers.
+We describe requirements for a framework which is useful for end-users, network operators, vendors and applications. Our brief survey of existing performance metrics concludes that none of the metrics we looked at meet all of the requirements at once. This clearly presents an opportunity. For instance, RPM does a great job of improving visibility of network quality issues beyond throughput, but is inherently about end-to-end tests and is not designed to help network operators monitor, test, and understand their networks from within. Quality Attenuation {{TR-452.1}}, on the other hand, is a great tool for understanding the performance of a network from within, but is not easy to use or understand for end-users or application developers.
 
-Quality attenuation is a network quality metric that meets the three criteria we set out in the requirements; it captures the probabilty of good or bad application outcomes, it is composable, and it can be compared to a variety of application requirements. The part that is still missing is how to present quality attenuation results to end-users and application developers in an understandable way. We believe a per-application (or per application-type) approach is appropriate here. The challenge lies in how to simplify. We must specify how and when it is apporpriate to throw away information without loosing too much precision and accuracy in the results. This depends on the needs and behaviours of different applications, and therefore the IETF seems like a good place to develop this. We need feedback from a wide range of application developers, protocol designers, and other users to make sure the resulting framework is as robust and general as possible.
+It is possible that the requirements described here are impossible to completely meet in practice. Still, we believe aiming for a framework and metrics that do meet the requirements is a useful goal. A solution that meets all of these requirements may help improve the Internet by strengthening incentives to deploy solutions that materially affect the quality of user experiences.
 
 # Conventions and Definitions
 
@@ -247,4 +249,4 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to acknowledge Gavin Young, Peter Thompson, Brendan Black, Kevin Smith, Gino Dion, Mayur Sarode, Greg Mirsky, Olav Nedrelid, Wim De Ketelaere and Ian Wheelock for their review and comments.
+The authors would like to acknowledge Gavin Young, Kevin Smith, Peter Thompson, Brendan Black, Gino Dion, Mayur Sarode, Greg Mirsky, Olav Nedrelid, Karl Magnus Kalvik, Knut Joar Strømmen, Hans Petter Dalsklev, Jakub Kozlowski, Wim De Ketelaere and Ian Wheelock for their comments, reviews and contributions.
