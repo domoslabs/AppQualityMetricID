@@ -201,15 +201,18 @@ Quality Attenuation is composable because convolution of quality attenuation val
 
 This table summarizes the properties of each of the metrics we have surveyed.
 
+The column "Capture probability of general applications working well" records whether each metric can in principle capture the information necessary to compute the probability that a general application will work well. We assume measurements capture the properties of the end-to-end network path that the application is using.
+
+
 | Metric                         | Capture probability of general applications working well | Easy to articulate Application requirements   | Composable |
 |--------------------------------|----------------------------------------------------------|-----------------------------------------------|------------|
-| Average latency                | No                                                       | Yes                                           | Yes        |
+| Average latency                | Yes for some applications                                | Yes                                           | Yes        |
 | Variance of latency            | No                                                       | No                                            | Yes        |
 | Jitter                         | No                                                       | Yes                                           | No         |
-| Average Peak Throughput        | No                                                       | Yes                                           | No         |
+| Average Peak Throughput        | Yes for some applications                                | Yes                                           | No         |
 | 99th Percentile of Latency     | No                                                       | No                                            | No         |
-| Trimmed mean of latency        | Yes (depending on what is measured)                      | Yes                                           | No         |
-| Round Trips Per Minute         | Yes                                                      | Yes                                           | No         |
+| Trimmed mean of latency        | Yes for some applications                                | Yes                                           | No         |
+| Round Trips Per Minute         | Yes for some applications                                | Yes                                           | No         |
 | Quality Attenuation            | Yes                                                      | No                                            | Yes        |
 
 # Conclusion
