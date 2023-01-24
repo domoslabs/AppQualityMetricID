@@ -110,13 +110,17 @@ The overall goal is to describe the requirements for an objective network qualit
 # Requirements
 This section describes the three main requirements, and the motivation for each, in turn.
 
-In general, application success depends on the delay of the network links and computational steps involved in making the application function. These delays in turn depend on how the application places load on the network, how the network is affected by environmental conditions, and the behavior of other users sharing the network resources. A suitable network performance metric must be able to desribe the delay characteristics of the network under realistic conditions and in enough detail to compute how likely application success is with satisfactory accuracy and precision.
+In general, what all stakeholders ultimately care about is the success of applications running over the network. Application success depends, not just on bandwidth, but also on the delay of the network links and computational steps involved in making the application function.
 
-Different applications have different needs from the network, and they put different patterns of load on the network. To provide an answer to whether or not applications will work well or fail, a network quality framework must therefore be able to compare measurements of network performance to many different application requirements. Flexibility in describing application requirements is a necessary condition.
+These delays in turn depend on how the application places load on the network, how the network is affected by environmental conditions, and the behavior of other users sharing the network resources.
 
-How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support spatial composition {{RFC6049}}, {{RFC6390}}. Spatial composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time for the application to succeed. The most intuitive way to think about sequential composition (in our opinion) is as addition and subtraction. For example, if we measure web-page load-times and find they are too often too slow, we may then separately measure DNS resolution time, TCP round-trip time and the time it takes to establish TLS connections to get a better idea of where the problem is. To be maximally useful for operators, a network quality framework should support this kind of analysis.
+Different applications have different needs from the network, and they put different patterns of load on the network. To provide an answer to whether or not applications will work well or fail, a network quality framework must therefore be able to compare measurements of network performance to many different application requirements.
 
-To summarize, the framework and "meaningful metric" we're looking for should have the following properties:
+Flexibility in describing application requirements and ability to capture the delay characteristics of the network in enough detail to compute how likely application success is with satisfactory accuracy and precision are necessary conditions.
+
+How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support spatial composition {{RFC6049}}, {{RFC6390}}. Spatial composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time for the application to succeed.
+
+To summarise, the framework and "meaningful metric" we're looking for should have the following properties:
 
   1. Capture the information necessary to compute the probability that applications will work well. (Useful for End-users and Application developers)
 
@@ -126,28 +130,27 @@ To summarize, the framework and "meaningful metric" we're looking for should hav
 
 
 ## Requirements for end-users
-The quality framework should facilitate a metric that is objective, relatable and relatively understandable for an end-user.
-We are looking for a middle ground between objective QoS metrics (Throughput, packet loss, jitter, average latency) and subjective but understandable QoE metrics (MOS, 5 star ratings).
-The ideal framework should be objective like QoS metrics and understandable like QoE metrics.
+The quality framework should facilitate a metric that is objective, relatable and relatively understandable for an end-user. We are looking for a middle ground between objective QoS metrics (Throughput, packet loss, jitter, average latency) and subjective but understandable QoE metrics (MOS, 5 star ratings). The ideal framework should be objective like QoS metrics and understandable like QoE metrics.
 
-If these requirements are met, the end-user can understand if a network can reliably deliver what they actually care about: the outcomes of applications.
-Examples are how quickly a web-page loads, the smoothness of a video conference, or whether or not a video game has any lag.
+If these requirements are met, the end-user can understand if a network can reliably deliver what they actually care about: the outcomes of applications. Examples are how quickly a web-page loads, the smoothness of a video conference, or whether or not a video game has any lag.
+
 
 ## Requirements from Application and Platform Developers
-
-The framework needs to give developers the ability to describe the network requirements of their application. The format for specifying network requirements must include all relevant dimensions of network quality so that different applications which are senstive to different network quality dimensions can all evaluate the network accurately. We can’t expect all developers to have network expertise, so to make it easy for developers to use the framework it is key that network requirements can be specified approximately. Therefore, it must be possible to describe both simple and complex network requirements. The framework also needs to be flexible so it can be used with different kinds of traffic and so that extreme network requirements that far exceed the needs of today's applications can also be articulated.
+The framework needs to give developers the ability to describe the network requirements of their application. The format for specifying network requirements must include all relevant dimensions of network quality so that different applications which are senstive to different network quality dimensions can all evaluate the network accurately. We can't expect all developers to have network expertise, so to make it easy for developers to use the framework it is key that network requirements can be specified approximately. Therefore, it must be possible to describe both simple and complex network requirements. The framework also needs to be flexible so it can be used with different kinds of traffic and so that extreme network requirements that far exceed the needs of today's applications can also be articulated.
 
 If these requirements are met, developers of application or platforms can state or test their network requirements and evalutate if the network is sufficent for a great application outcome. Both the applications that have networking expertise and those who don't can make use of the framework.
 
+
 ## Requirements for Network Operators and Network Solution Vendors
+From an operator perspective, the key is to have a framework that lets operators find the network quality bottlenecks and objectively compare different networks and technologies. To achieve this, the framework must support mathematically sound compositionality ('addition' and 'subtraction'). Why? Network operators rarely manage network traffic end-to-end. If a test is purely end-to-end, the ability to find bottlenecks may be gone. If, however, we could measure end-to-end (e.g., a-b-c-d-e) and not-end-to-end (e.g., b-c-d-e) and subtract, we can isolate the areas outside the influence of the network operator. In other words we could get the network quality of a-b and b-c-d-e separately. This is key for fault detection and accountability.
 
-From an operator perspective, the key is to have a framework that lets operators find the network quality bottlenecks and objectively compare different networks and technologies. To achieve this, the framework must support mathematically sound compositionality (‘addition’ and ‘subtraction’). Why? Network operators rarely manage network traffic end-to-end. If a test is purely end-to-end, the ability to find bottlenecks may be gone. If, however, we could measure end-to-end (e.g., a-b-c-d-e)  and not-end-to-end (e.g., b-c-d-e) and subtract, we can isolate the areas outside the influence of the network operator. In other words we could get the network quality of a-b and b-c-d-e separately. This is key for fault detection and accountability.
+By having mathematically correct composition, a network operator can measure two segments separately, perhaps even with different approaches, and add them together to understand the end-to-end network quality. A network equipment vendor may use a different approach to figure out the network quality from the network equipment to the end-user device and to servers, having the possibility of adding these segments will help network operators better understand end-to-end performance.
 
-By having mathematically correct composition, a network operator can measure two segments separately, perhaps even with different approaches, and add them together to understand the end-to-end network quality. A network equipment vendor may use a different approach to figure out the network quality from the network equipment to the end–user device and to servers, having the possibility of adding these segments will help network operators better understand end-to-end performance.
-
-The quality framework must be useful for both lab testing and monitoring of production networks. It must be useful on different time-scales and it can’t have a dependency on network technology or OSI layer.
+For another example where spatial composition is useful we can look at a typical web page load sequence. If we measure web-page load-times and find they are too often too slow, we may then separately measure DNS resolution time, TCP round-trip time and the time it takes to establish TLS connections to get a better idea of where the problem is. To be maximally useful for operators, a network quality framework should support this kind of analysis.
+The quality framework must be useful for both lab testing and monitoring of production networks. It must be useful on different time-scales and it can't have a dependency on network technology or OSI layer.
 
 If these requirements are met, a network operator can monitor and test their network and understand where the true bottlenecks are, regardless of network technology.
+
 
 # Discussion of other performance metrics
 Many network performance metrics and frameworks for reasoning about them have been proposed, used, and abused througout the years. We present a brief description of some of the most relevant metrics.
