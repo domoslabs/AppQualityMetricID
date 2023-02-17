@@ -191,7 +191,7 @@ The most common definition of PDV {{RFC5481}} measures the difference in one-del
 PDV cannot be composed.
 
 ## Trimmed Mean of Latency
-The trimmed mean of latency is the average computed after the worst x percent of samples have been removed. Trimmed means are typically used in cases where there is a know rate of measurement errors that should be filtered out before computing results.
+The trimmed mean of latency is the average computed after the worst x percent of samples have been removed. Trimmed means are typically used in cases where there is a known rate of measurement errors that should be filtered out before computing results.
 
 In the case where the trimmed mean simply removes measurement errors, the result can be composed in the same way as the average latency. In cases where the trimmed mean removes real measurements, the trimming operation introduces errors that may compound when composed.
 
