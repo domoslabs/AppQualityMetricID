@@ -43,10 +43,12 @@ author:
 normative:
 
 informative:
+ RFC3393: # IP Packet Delay Variation (IPDV)
+ RFC5481: # Packet Delay Variation Applicability Statement
  RFC6049: # Spatial Composition of Metrics
+ RFC6390: # Guidelines for Considering New Performance Metric Development
  #RFC8033: # PIE
  #RFC8290: # FQ_CoDel
- RFC6390: # Guidelines for Considering New Performance Metric Development
  RFC9318: # IAB Workshop report
  # SHARED:
  #   title: "The Internet is a Shared Network"
@@ -174,14 +176,19 @@ The 99th percentile of latency relates to user-observable application outcomes b
 It is not possible to compose 99th-percentile values.
 
 ## Variance of latency
-Network latency is not necessarily normally distributed, and so it can be difficult to extrapolate from a measure of the variance of latency to how well specific applications will work.
+The variance of latency can be calculated from any collection of samples, but network latency is not necessarily normally distributed, and so it can be difficult to extrapolate from a measure of the variance of latency to how well specific applications will work.
 
 The variance of latency can be composed. If the variance of links a-b and b-c is known, then the variance of the composition a-b-c is the sum of the variances a-b and b-c.
 
-## Jitter
-Jitter measures the difference in delay between subsequent packets. Some applications are very sensitive to this because of time-outs that cause later-than-usual packets to be discarded. For some applications, jitter can be useful in assessing application performance, especially when it is combined with other latency metrics. Jitter does not contain enough information to compute the probability that a wide range of applications will work well.
+## Inter-Packet Delay Variation (IPDV)
+The most common definition of IPDV {{RFC5481}} measures the difference in one-delay between subsequent packets. Some applications are very sensitive to this because of time-outs that cause later-than-usual packets to be discarded. For some applications, IPDV can be useful in assessing application performance, especially when it is combined with other latency metrics. IPDV does not contain enough information to compute the probability that a wide range of applications will work well.
 
-Jitter cannot be composed.
+IPDV cannot be composed.
+
+## Packet Delay Variation (PDV)
+The most common definition of PDV {{RFC5481}} measures the difference in one-delay between the smallest recorded latency and each value in a sample.
+
+PDV cannot be composed.
 
 ## Trimmed Mean of Latency
 The trimmed mean of latency is the average computed after the worst x percent of samples have been removed. Trimmed means are typically used in cases where there is a know rate of measurement errors that should be filtered out before computing results.
@@ -211,7 +218,8 @@ The column "Capture probability of general applications working well" records wh
 |--------------------------------|----------------------------------------------------------|-----------------------------------------------|------------|
 | Average latency                | Yes for some applications                                | Yes                                           | Yes        |
 | Variance of latency            | No                                                       | No                                            | Yes        |
-| Jitter                         | No                                                       | Yes                                           | No         |
+| IPDV                           | Yes for some applications                                | No                                            | No         |
+| PDV                            | Yes for some applications                                | No                                            | No         |
 | Average Peak Throughput        | Yes for some applications                                | Yes                                           | No         |
 | 99th Percentile of Latency     | No                                                       | No                                            | No         |
 | Trimmed mean of latency        | Yes for some applications                                | Yes                                           | No         |
