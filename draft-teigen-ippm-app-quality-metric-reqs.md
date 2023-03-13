@@ -128,7 +128,7 @@ To summarise, the framework and "meaningful metric" we're looking for should hav
 
  2. Compare meaningfully to different application requirements.
 
- 3. Compose. So that operators can quantify the contributions of different sub-outcomes and sub-paths of the network. (Useful for Operators and Vendors)
+ 3. Compose. So that operators can isolate and quantify the contributions of different sub-outcomes and sub-paths of the network. (Useful for Operators and Vendors)
 
 
 ## Requirements for end-users
@@ -251,6 +251,6 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-The authors would like to acknowledge Gavin Young, Kevin Smith, Peter Thompson, Brendan Black, Gino Dion, Mayur Sarode, Greg Mirsky, Olav Nedrelid, Karl Magnus Kalvik, Knut Joar Strømmen, Hans Petter Dalsklev, Jakub Kozlowski, Wim De Ketelaere and Ian Wheelock for their comments, reviews, and contributions.
+The authors would like to acknowledge Gavin Young, Kevin Smith, Peter Thompson, Brendan Black, Gino Dion, Mayur Sarode, Greg Mirsky, Olav Nedrelid, Karl Magnus Kalvik, Knut Joar Strømmen, Hans Petter Dalsklev, Jakub Kozlowski, Wim De Ketelaere, William Hawkins, and Ian Wheelock for their comments, reviews, and contributions.
 
 
