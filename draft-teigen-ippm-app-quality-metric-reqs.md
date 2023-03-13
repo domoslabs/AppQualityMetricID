@@ -43,7 +43,7 @@ author:
 normative:
 
 informative:
- RFC3393: # IP Packet Delay Variation (IPDV)
+ #RFC3393: # IP Packet Delay Variation (IPDV)
  RFC5481: # Packet Delay Variation Applicability Statement
  RFC6049: # Spatial Composition of Metrics
  RFC6390: # Guidelines for Considering New Performance Metric Development
