@@ -136,11 +136,11 @@ The quality framework should facilitate a metric that is objective, relatable, a
 
 If these requirements are met, the end-user can understand if a network can reliably deliver what they care about: the outcomes of applications. Examples are how quickly a web page loads, the smoothness of a video conference, or whether or not a video game has any lag.
 
-Each end user will have an individual tolerance of session quality, below which their quality of experience becomes personally unacceptable. However it may not be feasible to capture and represent these tolerances _per user_ as the user group scales. A compromise is for the quality of experience framework to place the responsibility for sourcing and representing end-user requirements onto the application developer. Application developers should perform user-acceptance testing (UAT) of their application across a range of users, terminals and network conditions to determine the terminal and network requirements that will meet the end-user quality threshold for an acceptable subset of their end users. Some real world examples where 'acceptable levels' have been derived by application developers include:
-Remote music collaboration: 28ms latency note-to-ear for direct monitoring, <2ms jitter
-Online gaming: 6Mb/s downlink throughput and 30ms RTT to join a multiplayer game
-Virtual reality: <20ms RTT from head motion to rendered update in VR
-_(note: developers of similar applications may have arrived at different figures )_
+Each end user will have an individual tolerance of session quality, below which their quality of experience becomes personally unacceptable. However it may not be feasible to capture and represent these tolerances _per user_ as the user group scales. A compromise is for the quality of experience framework to place the responsibility for sourcing and representing end-user requirements onto the application developer. Application developers should perform user-acceptance testing (UAT) of their application across a range of users, terminals and network conditions to determine the terminal and network requirements that will meet the end-user quality threshold for an acceptable subset of their end users. Some real world examples where 'acceptable levels' have been derived by application developers include (note: developers of similar applications may have arrived at different figures):
+
+* Remote music collaboration: 28ms latency note-to-ear for direct monitoring, <2ms jitter
+* Online gaming: 6Mb/s downlink throughput and 30ms RTT to join a multiplayer game
+* Virtual reality: <20ms RTT from head motion to rendered update in VR
 
 Performing this UAT helps the developer understand what likelihood a new end-user has of an acceptable Quality of Experience based on the application's existing requirements towards the network. These requirements can evolve and improve based on feedback from end users, and in turn better inform the application's requirements towards the network.
 
