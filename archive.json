@@ -1,0 +1,150 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-03-23T00:11:35.508236+00:00",
+  "repo": "domoslabs/AppQualityMetricID",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOIwfJss5dGhIj",
+      "title": "Add sections on PDV and IPDV, remove section on jitter",
+      "url": "https://github.com/domoslabs/AppQualityMetricID/issues/2",
+      "state": "CLOSED",
+      "author": "bjornite",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Following feedback from the mailing list, we should avoid using the term jitter. The metrics Packet Delay Variation (PDV) and Inter-Packet Delay Variation (IPDV) should be discussed.",
+      "createdAt": "2023-01-30T08:45:52Z",
+      "updatedAt": "2023-02-17T15:19:23Z",
+      "closedAt": "2023-02-17T15:19:23Z",
+      "comments": [
+        {
+          "author": "bjornite",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Commit fcd8515 fixes this",
+          "createdAt": "2023-02-17T15:19:19Z",
+          "updatedAt": "2023-02-17T15:19:19Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOIwfJss5IufPi",
+      "title": "(Very) Minor typo fix (know -> known).",
+      "url": "https://github.com/domoslabs/AppQualityMetricID/pull/1",
+      "state": "MERGED",
+      "author": "hawkinsw",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I really, *really* enjoyed this draft and look forward to incorporating your insight as I continue to help work on the RPM spec. I know this is a very minor change, but I hope it helps!",
+      "createdAt": "2023-01-28T04:57:35Z",
+      "updatedAt": "2023-02-17T13:41:15Z",
+      "baseRepository": "domoslabs/AppQualityMetricID",
+      "baseRefName": "main",
+      "baseRefOid": "7a4de1f4ee2bda39ce68b2646044bbea76503cc3",
+      "headRepository": "hawkinsw/AppQualityMetricID",
+      "headRefName": "minor_nit_known",
+      "headRefOid": "4b0271a61a95dc60db5979226d99b2e0feea37a2",
+      "closedAt": "2023-02-17T13:41:14Z",
+      "mergedAt": "2023-02-17T13:41:14Z",
+      "mergedBy": "bjornite",
+      "mergeCommit": {
+        "oid": "de5a9c2a081cf2d5553a0da4d4b3a328468493ca"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOIwfJss5Md1HR",
+      "title": "Extended end-user requirements",
+      "url": "https://github.com/domoslabs/AppQualityMetricID/pull/3",
+      "state": "MERGED",
+      "author": "Kevsy",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Suggested the role application developer's play in collecting and representing end-user requirements",
+      "createdAt": "2023-03-20T15:51:09Z",
+      "updatedAt": "2023-03-22T15:10:48Z",
+      "baseRepository": "domoslabs/AppQualityMetricID",
+      "baseRefName": "main",
+      "baseRefOid": "c810e60ad3a35281cd07d30dede5df29953b7811",
+      "headRepository": "Kevsy/AppQualityMetricID",
+      "headRefName": "patch-1",
+      "headRefOid": "bca7655b126d52d372cc6662852866733e8d31c0",
+      "closedAt": "2023-03-22T15:10:48Z",
+      "mergedAt": "2023-03-22T15:10:48Z",
+      "mergedBy": "bjornite",
+      "mergeCommit": {
+        "oid": "22fc0254a77340410bdc67a360295088167c5433"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIwfJss5QomEw",
+          "commit": {
+            "abbreviatedOid": "7a41916"
+          },
+          "author": "bjornite",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-03-22T15:09:28Z",
+          "updatedAt": "2023-03-22T15:09:28Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
