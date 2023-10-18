@@ -2,7 +2,7 @@
 <html lang="en" class="Internet-Draft">
 <head>
 <meta charset="utf-8">
-<meta content="Common,Latin" name="scripts">
+<meta content="Common,Greek,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Requirements for a Network Quality Framework Useful for Applications, Users, and Operators</title>
 <meta content="Bjørn Ivar Teigen" name="author">
@@ -15,29 +15,27 @@ Application developers need a network metric that allows them to evaluate how we
 Network Operators and Vendors need a metric that facilitates troubleshooting and optimization of their networks.
 Existing network quality metrics and frameworks typically address the needs of one or two of these stakeholders, but we have yet to find one that bridges the needs of all three. 
     " name="description">
-<meta content="xml2rfc 3.17.0" name="generator">
+<meta content="xml2rfc 3.18.2" name="generator">
 <meta content="Latency" name="keyword">
 <meta content="Metric" name="keyword">
 <meta content="RPM" name="keyword">
 <meta content="Quality Attenuation" name="keyword">
 <meta content="draft-teigen-ippm-app-quality-metric-reqs-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.17.0
-    Python 3.10.10
-    appdirs 1.4.4
+  xml2rfc 3.18.2
+    Python 3.11.6
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
-    html5lib 1.1
+    google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.2
-    MarkupSafe 2.1.1
+    lxml 4.9.3
+    platformdirs 3.11.0
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 65.6.0
+    requests 2.31.0
+    setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.6
+    wcwidth 0.2.8
 -->
 <link href="draft-teigen-ippm-app-quality-metric-reqs.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -619,6 +617,7 @@ sub, sup {
   clear: left;
   float: left;
   text-align: right;
+  margin-right: 1ch;
 }
 #identifiers dd {
   margin: 0;
@@ -659,7 +658,7 @@ sub, sup {
 }
 #toc nav li {
   line-height: 1.3em;
-  margin: 0.75em 0;
+  margin: 2px 0;
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
@@ -670,7 +669,8 @@ sub, sup {
 .references dt {
   text-align: right;
   font-weight: bold;
-  min-width: 7em;
+  min-width: 10ch;
+  margin-right: 1.5ch;
 }
 .references dt:target::before {
   content: "⇒";
@@ -678,7 +678,7 @@ sub, sup {
   margin: 0 10px 0 -25px;
 }
 .references dd {
-  margin-left: 8em !important;
+  margin-left: 12ch !important;
   overflow: auto;
 }
 
@@ -751,7 +751,7 @@ hr.addr {
     z-index: 2;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 1px 0 0 0;
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
@@ -875,16 +875,13 @@ hr.addr {
     border-top: none;
     padding-top: 0;
   }
-  figure, pre {
+  figure, pre, .vcard {
     page-break-inside: avoid;
-  }
-  figure {
-    overflow: scroll;
   }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
-  h2+*, h3+*, h4+*, h5+*, h6+* {
+  :is(h2, h3, h4, h5, h6)+*, dd {
     page-break-before: avoid;
   }
   pre {
@@ -897,6 +894,9 @@ hr.addr {
   }
   td {
     border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
   }
 }
 
@@ -998,28 +998,6 @@ address div.right {
   text-align: right;
 }
 
-/* Give the table caption label the same styling as the figcaption */
-
-@media print {
-  .toplink {
-    display: none;
-  }
-
-  /* avoid overwriting the top border line with the ToC header */
-  #toc {
-    padding-top: 1px;
-  }
-
-  /* Avoid page breaks inside dl and author address entries */
-  dd {
-    page-break-before: avoid;
-  }
-  .vcard {
-    page-break-inside: avoid;
-  }
-
-}
-
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -1056,11 +1034,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">app-quality-metric-reqs</td>
-<td class="right">March 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Teigen &amp; Olden</td>
-<td class="center">Expires 23 September 2023</td>
+<td class="center">Expires 20 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1051,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-teigen-ippm-app-quality-metric-reqs-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-22" class="published">22 March 2023</time>
+<time datetime="2023-10-18" class="published">18 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-23">23 September 2023</time></dd>
+<dd class="expires"><time datetime="2024-04-20">20 April 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1137,7 +1115,7 @@ Existing network quality metrics and frameworks typically address the needs of o
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1259,7 +1237,7 @@ Existing network quality metrics and frameworks typically address the needs of o
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">This document aims to describe the features a network performance framework must have to be understandable to end-users, useful for application developers, and actionable for network operators. The motivation for targeting users, application developers, and operators all at once is this: solutions exist for many of the problems causing high and unstable latency in the Internet, but the incentives to deploy them are relatively weak. Creating a unifying framework for network quality can help make these incentives stronger. Stronger incentives can be achieved by reaching end-users and application developers while simultaneously measuring something operators and vendors can work to optimize.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document aims to describe the features a network performance framework must have to be understandable to end-users, useful for application developers, and actionable for network operators. One of the key motivations behind this initiative is to bridge the gap between the technical aspects of network performance and the practical needs of those who depend on it. While solutions exist for many of the problems causing high and unstable latency in the Internet, the incentives to deploy them have remained relatively weak. By creating a unifying framework for assessing network quality, we aim to strengthen these incentives significantly.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Bandwidth is necessary but not sufficient for high-quality modern network experiences. Idle latency, working latency, jitter, and unmitigated packet loss are major causes of poor application outcomes. The impact of latency is widely recognized in network engineering circles <span>[<a href="#BITAG" class="cite xref">BITAG</a>]</span>. Unfortunately, it is complicated to benchmark the quality of network transport. Most end-users are unable to relate to metrics other than Mbps, which they have long been conditioned to think of as the only dimension of network quality.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">Real Time Response under load tests<span>[<a href="#RRUL" class="cite xref">RRUL</a>]</span> and Responsiveness <span>[<a href="#RPM" class="cite xref">RPM</a>]</span> make huge strides in making a better network quality metric that is far closer to application outcomes than bandwidth is, and the latter is successful at being relatively relatable/understandable to end-users.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">As pointed out in <span>[<a href="#RPM" class="cite xref">RPM</a>]</span>, “Our networks remain unresponsive, not from a lack of technical solutions, but rather a lack of awareness of the problem.” The lack of awareness means a lack of incentives for operators to invest in improving network quality (beyond increasing the throughput). While Open Source solutions exist, vendors rarely implement them. And it all boils down to the lack of a universally accepted network quality framework that captures how well applications are likely to work.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1287,11 +1265,14 @@ Existing network quality metrics and frameworks typically address the needs of o
 <p id="section-3-6">How can operators take action when measurements show that applications fail too often? We can answer this question if the measured metric(s) support spatial composition <span>[<a href="#RFC6049" class="cite xref">RFC6049</a>]</span>, <span>[<a href="#RFC6390" class="cite xref">RFC6390</a>]</span>. Spatial composition gives us the ability to divide results into sub-results, each measuring the performance of a required sub-milestone that must be reached in time for the application to succeed.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <p id="section-3-7">To summarise, the framework and "meaningful metric" we're looking for should have the following properties:<a href="#section-3-7" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3-8">
-<li id="section-3-8.1">Capture the information necessary to compute the probability that applications will work well. (Useful for End-users and Application developers)<a href="#section-3-8.1" class="pilcrow">¶</a>
+<li id="section-3-8.1">
+          <p id="section-3-8.1.1">Capture the information necessary to compute the probability that applications will work well. (Useful for End-users and Application developers)<a href="#section-3-8.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-8.2">Compare meaningfully to different application requirements.<a href="#section-3-8.2" class="pilcrow">¶</a>
+        <li id="section-3-8.2">
+          <p id="section-3-8.2.1">Compare meaningfully to different application requirements.<a href="#section-3-8.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-8.3">Compose. So that operators can isolate and quantify the contributions of different sub-outcomes and sub-paths of the network. (Useful for Operators and Vendors)<a href="#section-3-8.3" class="pilcrow">¶</a>
+        <li id="section-3-8.3">
+          <p id="section-3-8.3.1">Compose. So that operators can isolate and quantify the contributions of different sub-outcomes and sub-paths of the network. (Useful for Operators and Vendors)<a href="#section-3-8.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <div id="requirements-for-end-users">
@@ -1303,11 +1284,14 @@ Existing network quality metrics and frameworks typically address the needs of o
 <p id="section-3.1-2">If these requirements are met, the end-user can understand if a network can reliably deliver what they care about: the outcomes of applications. Examples are how quickly a web page loads, the smoothness of a video conference, or whether or not a video game has any lag.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Each end user will have an individual tolerance of session quality, below which their quality of experience becomes personally unacceptable. However it may not be feasible to capture and represent these tolerances <em>per user</em> as the user group scales. A compromise is for the quality of experience framework to place the responsibility for sourcing and representing end-user requirements onto the application developer. Application developers should perform user-acceptance testing (UAT) of their application across a range of users, terminals and network conditions to determine the terminal and network requirements that will meet the end-user quality threshold for an acceptable subset of their end users. Some real world examples where 'acceptable levels' have been derived by application developers include (note: developers of similar applications may have arrived at different figures):<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1-4.1">Remote music collaboration: 28ms latency note-to-ear for direct monitoring, &lt;2ms jitter<a href="#section-3.1-4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.1-4.1">
+            <p id="section-3.1-4.1.1">Remote music collaboration: 28ms latency note-to-ear for direct monitoring, &lt;2ms jitter<a href="#section-3.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-4.2">Online gaming: 6Mb/s downlink throughput and 30ms RTT to join a multiplayer game<a href="#section-3.1-4.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.1-4.2">
+            <p id="section-3.1-4.2.1">Online gaming: 6Mb/s downlink throughput and 30ms RTT to join a multiplayer game<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-4.3">Virtual reality: &lt;20ms RTT from head motion to rendered update in VR<a href="#section-3.1-4.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.1-4.3">
+            <p id="section-3.1-4.3.1">Virtual reality: &lt;20ms RTT from head motion to rendered update in VR<a href="#section-3.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.1-5">Performing this UAT helps the developer understand what likelihood a new end-user has of an acceptable Quality of Experience based on the application's existing requirements towards the network. These requirements can evolve and improve based on feedback from end users, and in turn better inform the application's requirements towards the network.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
@@ -1544,6 +1528,7 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
       <h2 id="name-references">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-9.1">
         <h3 id="name-normative-references">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -1559,6 +1544,8 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-9.2">
         <h3 id="name-informative-references">
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -1574,7 +1561,7 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <dd class="break"></dd>
 <dt id="Haeri22">[Haeri22]</dt>
         <dd>
-<span class="refTitle">"Mind Your Outcomes: The &amp;#916;QSD Paradigm for Quality-Centric Systems Development and Its Application to a Blockchain Case Study"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.mdpi.com/2073-431X/11/3/45">https://www.mdpi.com/2073-431X/11/3/45</a>&gt;</span>. </dd>
+<span class="refTitle">"Mind Your Outcomes: The ΔQSD Paradigm for Quality-Centric Systems Development and Its Application to a Blockchain Case Study"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.mdpi.com/2073-431X/11/3/45">https://www.mdpi.com/2073-431X/11/3/45</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5481">[RFC5481]</dt>
         <dd>
@@ -1606,6 +1593,7 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="acknowledgments">
 <section id="appendix-A">

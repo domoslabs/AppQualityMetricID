@@ -5,7 +5,7 @@
 IP Performance Measurement                                  B. I. Teigen
 Internet-Draft                                                  M. Olden
 Intended status: Informational                                     Domos
-Expires: 23 September 2023                                 22 March 2023
+Expires: 20 April 2024                                   18 October 2023
 
 
  Requirements for a Network Quality Framework Useful for Applications,
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 September 2023.
+   This Internet-Draft will expire on 20 April 2024.
 
 Copyright Notice
 
@@ -110,15 +110,14 @@ Table of Contents
 
    This document aims to describe the features a network performance
    framework must have to be understandable to end-users, useful for
-   application developers, and actionable for network operators.  The
-   motivation for targeting users, application developers, and operators
-   all at once is this: solutions exist for many of the problems causing
-   high and unstable latency in the Internet, but the incentives to
-   deploy them are relatively weak.  Creating a unifying framework for
-   network quality can help make these incentives stronger.  Stronger
-   incentives can be achieved by reaching end-users and application
-   developers while simultaneously measuring something operators and
-   vendors can work to optimize.
+   application developers, and actionable for network operators.  One of
+   the key motivations behind this initiative is to bridge the gap
+   between the technical aspects of network performance and the
+   practical needs of those who depend on it.  While solutions exist for
+   many of the problems causing high and unstable latency in the
+   Internet, the incentives to deploy them have remained relatively
+   weak.  By creating a unifying framework for assessing network
+   quality, we aim to strengthen these incentives significantly.
 
    Bandwidth is necessary but not sufficient for high-quality modern
    network experiences.  Idle latency, working latency, jitter, and
@@ -556,9 +555,9 @@ Table of Contents
               "Bufferbloat: Dark buffers in the Internet", n.d.,
               <https://queue.acm.org/detail.cfm?id=2071893>.
 
-   [Haeri22]  "Mind Your Outcomes: The &#916;QSD Paradigm for Quality-
-              Centric Systems Development and Its Application to a
-              Blockchain Case Study", n.d.,
+   [Haeri22]  "Mind Your Outcomes: The ΔQSD Paradigm for Quality-Centric
+              Systems Development and Its Application to a Blockchain
+              Case Study", n.d.,
               <https://www.mdpi.com/2073-431X/11/3/45>.
 
    [RFC5481]  Morton, A. and B. Claise, "Packet Delay Variation
